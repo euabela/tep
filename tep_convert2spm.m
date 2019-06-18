@@ -1,19 +1,19 @@
 function tep_convert
 %% Introduction
-% Purpose:
+% PURPOSE:
 % - Convert multitrial data from Fieldtrip to SPM12
 %
-% Dependecies: 
+% DEPENDENCIES: 
 % - SPM12
 %
-% Inputs: 
+% INPUTS: 
 % - Epoched Fieldtrip data file (.mat, containing struct 'temp').
 %
-% Outputs:
+% OUTPUTS:
 % - Epoched SPM12 data file with prefix 'spmeeg_'
 %
 %--------------------------------------------------------------------------
-% (c) 05/2017, Eugenio Abela, Richardson Lab, IoPPN, KCL
+% (c) Eugenio Abela, Richardson Lab, IoPPN, KCL
 
 
 %% Select data and output directory
@@ -30,9 +30,9 @@ wb = waitbar(0,'Converting files...');
 for ii = 1:size(data2convert,1)
     
     % Load variable
-    load(deblank(data2convert(ii,:)));
+    temp = load(deblank(data2convert(ii,:)));
     
-    % Assign new pathname and convert
+    % Assign new path name and convert
     [~ , nam, ext]  = spm_fileparts(data2convert(ii,:));
     filename        = [outputdir '/' 'spmeeg_' nam ext];
     D               = spm_eeg_ft2spm(temp,filename);
