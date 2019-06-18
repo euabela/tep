@@ -1,16 +1,37 @@
-%% tep_dcm_mmc_bgt
+function tep_dcm_mmc_bgt(fileList, outDir, start, offset)
+% PURPOSE:
+%  - This routine fits a model of a M1-M1-Thalamus circuit to TMS-evoked
+%    potential data
+%  - Can be used to fit a model to the whole temporal window, or to a 
+%    series of non-overlapping windows
+%
+% INPUTS:
+% - fileList   List of input files in SPM format. This should be time-  
+%              series from virtual electrodes ('LFP-like') data.
+% - outDir     Output directory
+% - start      Start of fitting window in ms
+% - offsets    Vector of window offsets in ms (e.g. if 50:10:100, fits
+%              windows from start to 50ms, start to 60ms etc.)             
+% 
+% OUTPUTS:
+% - DCM files 
+%
+% REFERENCES:
+% - Motor microcircuit: PMID 26956910
+% - Basal ganglia-Thalamus model: PMID 30130648
 
-%% Preliminaries
-%--------------------------------------------------------------------------
-% Define time windows
-%--------------------------------------------------------------------------
-start   = -50;       
-offsets = 300; % if one number = 1 offset, so model whole window.
 
-% Define files and output directory
+%% Check inputs
 %--------------------------------------------------------------------------
-files  = spm_select(Inf,'^ia.*\.mat$');
-outdir = spm_select(1,'dir','Select output directory...');
+if naring<1 
+   error('Need inputs!'
+elseif nargin<2
+   files  = spm_select(Inf,'^ia.*\.mat$');
+   outdir = spm_select(1,'dir','Select output directory...');
+elseif nargin <3
+   start   = -50;       
+   offsets = 300; % if one number = 1 offset, so model whole window.
+end
 
 %% Specify DCM for each subject and time window
 %--------------------------------------------------------------------------
@@ -82,7 +103,7 @@ for subji = 1:size(files,1)
 
     end
 end
-disp('Done!');
-% end
 
-
+%% End
+%--------------------------------------------------------------------------
+disp('Done!')
